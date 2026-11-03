@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183c2c">
+  <title>Krishibondhu — Fair markets, direct connections</title>
+  <style>
+    :root{--green:#204d38;--green2:#2e704d;--lime:#d8edb7;--cream:#f6f7f0;--paper:#fff;--ink:#1d3025;--muted:#758278;--line:#e6ebe4;--orange:#f2a65a;--red:#bd5d4d;--shadow:0 12px 35px #1938250d}
+    *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
+    body.dark{--cream:#17231c;--paper:#202e25;--ink:#edf4ed;--muted:#a8b5aa;--line:#35463a;--shadow:0 12px 35px #0003}
+    .app{min-height:100vh}.sidebar{position:fixed;inset:0 auto 0 0;width:246px;background:var(--green);color:white;padding:25px 17px;display:flex;flex-direction:column;z-index:5}
+    .brand{display:flex;align-items:center;gap:11px;padding:0 10px 24px;border-bottom:1px solid #ffffff25}.brand-mark{background:#d7edb4;color:var(--green);width:39px;height:39px;border-radius:13px;display:grid;place-items:center;font-size:21px}.brand strong{display:block;font-size:17px;letter-spacing:.1px}.brand small{color:#c6d9c9;font-size:11px}
+    .nav-label{font-size:10px;text-transform:uppercase;letter-spacing:1.6px;color:#a8c0ac;margin:24px 12px 9px}.nav{display:grid;gap:4px}.nav button{display:flex;align-items:center;gap:12px;border:0;background:transparent;color:#d7e4d8;text-align:left;padding:11px 12px;border-radius:10px;font-size:13px}.nav button:hover,.nav button.active{background:#ffffff19;color:white}.nav .icon{width:20px;text-align:center;font-size:16px}.side-bottom{margin-top:auto}.demo-card{border:1px solid #ffffff2d;background:#ffffff0b;padding:13px;border-radius:13px;font-size:12px;color:#d3e2d5}.demo-card strong{display:block;color:white;margin-bottom:3px}.side-bottom button{margin-top:11px;width:100%;border:1px solid #ffffff50;background:transparent;color:white;border-radius:9px;padding:9px;font-size:12px}
+    .main{margin-left:246px;min-height:100vh}.topbar{height:74px;padding:0 34px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--paper)}.crumb{font-size:13px;color:var(--muted)}.crumb strong{color:var(--ink);font-size:15px}.top-actions{display:flex;align-items:center;gap:10px}.top-actions button,.select-role{background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:8px 11px}.select-role{font-size:12px}.user-avatar{width:34px;height:34px;border-radius:50%;background:#e5efdc;color:var(--green);display:grid;place-items:center;font-weight:700}
+    .content{max-width:1450px;padding:30px 34px 60px;margin:auto}.page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin:2px 0 23px}.eyebrow{font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--green2);font-weight:700}.page-head h1{font-size:28px;line-height:1.2;margin:5px 0 7px;letter-spacing:-.7px}.page-head p{margin:0;color:var(--muted);max-width:650px;font-size:13px}.actions{display:flex;gap:9px;flex-wrap:wrap}
+    .btn{border:0;border-radius:9px;padding:10px 14px;background:var(--green);color:white;font-weight:650;font-size:12px;box-shadow:0 3px 8px #173a2915}.btn:hover{background:var(--green2)}.btn.secondary{background:var(--paper);color:var(--green);border:1px solid var(--line);box-shadow:none}.btn.light{background:#eaf2e4;color:var(--green);box-shadow:none}.btn.danger{background:#fff0ee;color:#a13e31;box-shadow:none}.btn.small{padding:7px 10px;font-size:11px}.btn:disabled{opacity:.5;cursor:not-allowed}
+    .banner{padding:13px 15px;border-radius:11px;background:#fff2df;border:1px solid #f4dfbf;color:#76552b;font-size:12px;display:flex;gap:10px;align-items:flex-start;margin-bottom:18px}.dark .banner{background:#463722;border-color:#594832;color:#f4d6a8}.banner strong{color:inherit}
+    .grid{display:grid;gap:15px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.stat,.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}.stat{padding:17px 18px}.stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.stat-icon{background:#eef4e8;color:var(--green);width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-size:16px}.dark .stat-icon{background:#314437;color:#c4e6b1}.stat strong{font-size:23px;display:block;margin:11px 0 2px;letter-spacing:-.4px}.stat small{color:var(--muted);font-size:11px}
+    .two-col{grid-template-columns:minmax(0,1.35fr) minmax(280px,.8fr)}.card{padding:18px}.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.card-head h2{font-size:15px;margin:0}.card-head p{font-size:11px;color:var(--muted);margin:3px 0 0}.text-link{color:var(--green2);font-size:11px;font-weight:700;background:none;border:0}.dark .text-link{color:#b4d898}
+    .table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:520px}th{text-align:left;color:var(--muted);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;padding:9px 10px;border-bottom:1px solid var(--line)}td{font-size:12px;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:middle}tr:last-child td{border-bottom:0}.product-mini{display:flex;align-items:center;gap:9px;min-width:130px}.mini-image{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:#eef3e7;font-size:21px}.product-mini strong{display:block;font-size:12px}.product-mini small{display:block;color:var(--muted);font-size:10px}.price{font-weight:700}.badge{display:inline-flex;align-items:center;border-radius:20px;padding:4px 8px;font-size:10px;font-weight:650;background:#edf5e9;color:#376645;white-space:nowrap}.badge.orange{background:#fff2df;color:#946126}.badge.gray{background:#f0f1ee;color:#717a72}.badge.red{background:#ffefec;color:#a44439}.dark .badge.gray{background:#374239;color:#cad2c9}.empty{padding:30px;text-align:center;color:var(--muted);font-size:13px}
+    .filters{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:15px}.field,.filters input,.filters select{border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:var(--paper);color:var(--ink);font-size:12px;outline:none}.filters input{min-width:200px;flex:1}.field:focus,.filters input:focus,.filters select:focus{border-color:#6c9a76;box-shadow:0 0 0 3px #548c5e19}
+    .products{grid-template-columns:repeat(4,minmax(0,1fr))}.product-card{overflow:hidden;padding:0}.product-art{height:140px;position:relative;display:grid;place-items:center;font-size:56px;background:linear-gradient(135deg,#e9f1dd,#d5e6ca)}.product-art .badge{position:absolute;top:11px;left:11px;background:#ffffffdf}.heart{position:absolute;top:9px;right:9px;border:0;background:#ffffffdf;border-radius:50%;width:31px;height:31px;font-size:15px;color:#8a5a52}.product-body{padding:13px}.product-body h3{margin:0 0 3px;font-size:14px}.product-body .location{color:var(--muted);font-size:10px}.product-bottom{display:flex;align-items:end;justify-content:space-between;margin-top:12px}.product-price{font-size:15px;font-weight:750;color:var(--green)}.product-price small{font-size:10px;color:var(--muted);font-weight:400}.product-body .farmer-line{margin-top:8px;color:var(--muted);font-size:10px}
+    .hero{border-radius:18px;background:linear-gradient(110deg,#204d38 0%,#2d704b 70%,#498252);color:white;padding:30px 32px;position:relative;overflow:hidden;margin-bottom:18px;min-height:195px}.hero:after{content:"🌾";position:absolute;right:45px;bottom:-38px;font-size:170px;opacity:.16;transform:rotate(-12deg)}.hero .eyebrow{color:#c6e2ae}.hero h1{font-size:29px;max-width:580px;line-height:1.18;margin:9px 0}.hero p{color:#deecdf;font-size:12px;max-width:530px}.hero .actions{margin-top:18px;position:relative;z-index:1}.hero .btn{background:#e4f0d7;color:#214931}.hero .btn.secondary{color:white;background:#ffffff12;border-color:#ffffff60}
+    .crop-chip{display:inline-flex;background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:6px 11px;font-size:11px;margin:3px;color:var(--muted)}.chart{width:100%;height:230px}.chart svg{width:100%;height:100%;overflow:visible}.chart-label{fill:var(--muted);font-size:10px}.notice{font-size:11px;color:var(--muted);margin:12px 0 0}
+    .farmer-list{display:grid;gap:10px}.farmer-row{display:flex;align-items:center;gap:10px}.farmer-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#dfead5;font-size:18px}.farmer-row strong{font-size:12px;display:block}.farmer-row small{color:var(--muted);font-size:10px}.farmer-row .rating{margin-left:auto;font-size:11px;font-weight:700}
+    .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.form-grid label{display:grid;gap:5px;font-size:11px;color:var(--muted)}.form-grid input,.form-grid select,.form-grid textarea{border:1px solid var(--line);border-radius:8px;padding:9px;background:var(--paper);color:var(--ink);min-width:0}.form-grid textarea{min-height:72px;resize:vertical}.span2{grid-column:span 2}.calc-result{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}.calc-box{flex:1;min-width:130px;padding:13px;border-radius:11px;background:var(--cream)}.calc-box small{font-size:10px;color:var(--muted);display:block}.calc-box strong{font-size:19px;margin-top:4px;display:block}.modal-backdrop{position:fixed;inset:0;background:#07170db3;z-index:20;display:grid;place-items:center;padding:20px}.modal{width:min(560px,100%);background:var(--paper);border-radius:16px;padding:22px;max-height:90vh;overflow:auto;box-shadow:0 25px 80px #0003}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.modal-head h2{font-size:18px;margin:0}.close{border:0;background:var(--cream);color:var(--ink);border-radius:8px;width:32px;height:32px;font-size:18px}
+    .toast{position:fixed;right:22px;bottom:22px;z-index:30;background:#193e2c;color:white;border-radius:10px;padding:12px 16px;box-shadow:0 7px 30px #0003;font-size:12px;animation:up .2s ease}.hidden{display:none!important}@keyframes up{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
+    .mobile-brand,.menu-toggle{display:none}
+    @media(max-width:1100px){.products{grid-template-columns:repeat(3,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:760px){.sidebar{width:260px;transform:translateX(-100%);transition:transform .2s;box-shadow:12px 0 30px #0002}.sidebar.open{transform:none}.main{margin-left:0}.topbar{height:62px;padding:0 16px}.menu-toggle{display:inline-grid;place-items:center;border:0;background:transparent;color:var(--ink);font-size:22px;margin-right:10px}.crumb-wrap{display:flex;align-items:center}.content{padding:22px 15px 50px}.page-head h1{font-size:23px}.page-head{display:block}.page-head .actions{margin-top:14px}.hero{padding:23px 20px;min-height:210px}.hero h1{font-size:25px;max-width:90%}.hero:after{right:1px;bottom:-34px;font-size:120px}.two-col{grid-template-columns:1fr}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-art{height:108px;font-size:43px}.product-body{padding:10px}.top-actions{gap:5px}.top-actions button{padding:7px 8px}.select-role{max-width:125px}.stats{gap:10px}.stat{padding:13px}.stat strong{font-size:20px}.card{padding:14px}}
+    @media(max-width:390px){.products{grid-template-columns:1fr 1fr}.top-actions .hide-small{display:none}.stat-top{font-size:10px}.form-grid{grid-template-columns:1fr}.span2{grid-column:auto}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="brand-mark">🌿</div><div><strong>কৃষিবন্ধু</strong><small>KRISHIBONDHU</small></div></div>
+    <div class="nav-label">Workspace</div>
+    <nav class="nav" id="mainNav">
+      <button data-page="home"><span class="icon">⌂</span><span data-i18n="nav.home">Overview</span></button>
+      <button data-page="market"><span class="icon">▦</span><span data-i18n="nav.market">Marketplace</span></button>
+      <button data-page="prices"><span class="icon">⌁</span><span data-i18n="nav.prices">Market prices</span></button>
+      <button data-page="farmer"><span class="icon">♧</span><span data-i18n="nav.farmer">Farmer portal</span></button>
+      <button data-page="orders"><span class="icon">▤</span><span data-i18n="nav.orders">Orders</span></button>
+      <button data-page="delivery"><span class="icon">➤</span><span data-i18n="nav.delivery">Delivery</span></button>
+      <button data-page="calculator"><span class="icon">৳</span><span data-i18n="nav.calculator">Earnings calculator</span></button>
+      <button data-page="admin"><span class="icon">⚙</span><span data-i18n="nav.admin">Admin & demo settings</span></button>
+    </nav>
+    <div class="side-bottom"><div class="demo-card"><strong>● DEMO MODE</strong>Sample data only. No real orders, payments, or live market feeds.</div><button id="resetSide">↻ &nbsp; Reset demo data</button></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="crumb-wrap"><button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button><div class="crumb"><span>Krishibondhu&nbsp; / &nbsp;</span><strong id="crumbTitle">Overview</strong></div></div><div class="top-actions">
+      <select class="select-role" id="roleSelect" aria-label="Switch demo view"><option value="customer">🛍 Customer view</option><option value="farmer">🌱 Farmer view</option><option value="admin">🛡 Admin view</option></select>
+      <button id="langToggle" class="hide-small" title="Switch language">বাংলা</button><button id="themeToggle" aria-label="Toggle dark mode">☾</button><button id="notifyBtn" aria-label="Notifications">♧</button><div class="user-avatar">R</div>
+    </div></header>
+    <section class="content" id="content"></section>
+  </main>
+</div>
+<div id="modalHost"></div><div id="toastHost"></div>
+<script>
+(() => {
+  const KEY = "krishibondhu-demo-v1";
+  const districts = ["Savar, Dhaka","Manikganj","Bogura","Rajshahi","Rangpur","Cumilla","Jashore","Mymensingh","Natore","Narsingdi"];
+  const farmers = [
+    ["f1","Ayesha Begum","Savar, Dhaka","👩🏽‍🌾",true,"Seasonal vegetables grown with care."],["f2","Rahim Uddin","Manikganj","👨🏽‍🌾",true,"Family rice and lentil farm."],["f3","Mina Akter","Bogura","👩🏽‍🌾",true,"Fresh produce from our village fields."],["f4","Jamal Hossain","Rajshahi","👨🏽‍🌾",false,"Fruit grower specializing in mangoes."],["f5","Shila Rani","Rangpur","👩🏽‍🌾",true,"Potatoes and winter vegetables."],["f6","Kamal Mia","Cumilla","👨🏽‍🌾",true,"Smallholder farmer growing local favorites."],["f7","Nasima Khatun","Jashore","👩🏽‍🌾",true,"Fresh greens and aromatic produce."],["f8","Babul Sarker","Mymensingh","👨🏽‍🌾",false,"Rice, beans and seasonal crops."],["f9","Farida Yasmin","Natore","👩🏽‍🌾",true,"A community farm for quality produce."],["f10","Sujan Das","Narsingdi","👨🏽‍🌾",true,"Growing vegetables for nearby families."]
+  ].map(([id,name,location,avatar,verified,about],i)=>({id,name,location,avatar,verified,about,rating:[4.9,4.7,4.8,4.6,4.9,4.7,4.8,4.5,4.8,4.7][i]}));
+  const baseProducts = [
+    ["p1","Miniket Rice","Grains","f2",62,58,900,"kg","🍚"],["p2","Fresh Tomatoes","Vegetables","f1",42,36,260,"kg","🍅"],["p3","Farm Potatoes","Vegetables","f5",32,28,1200,"kg","🥔"],["p4","Red Onions","Vegetables","f3",78,70,480,"kg","🧅"],["p5","Purple Brinjal","Vegetables","f6",48,41,180,"kg","🍆"],["p6","Cauliflower","Vegetables","f10",38,32,220,"piece","🥦"],["p7","Green Cabbage","Vegetables","f5",30,25,350,"piece","🥬"],["p8","Green Chilies","Vegetables","f7",110,98,90,"kg","🌶️"],["p9","Fresh Spinach","Vegetables","f7",26,22,140,"bundle","🥬"],["p10","Deshi Mango","Fruits","f4",95,82,380,"kg","🥭"],["p11","Sweet Bananas","Fruits","f8",55,47,300,"dozen","🍌"],["p12","Masoor Lentils","Pulses","f2",115,102,200,"kg","🫘"],["p13","Green Beans","Vegetables","f3",60,52,170,"kg","🫛"],["p14","Local Garlic","Spices","f9",145,130,110,"kg","🧄"],["p15","Fresh Pumpkin","Vegetables","f6",35,29,400,"kg","🎃"],["p16","Sweet Papaya","Fruits","f1",45,38,250,"kg","🍈"],["p17","Red Amaranth","Vegetables","f7",24,20,110,"bundle","🌿"],["p18","Aromatic Rice","Grains","f8",88,78,300,"kg","🍚"],["p19","Green Peas","Pulses","f5",75,66,170,"kg","🫛"],["p20","Fresh Ginger","Spices","f9",125,112,140,"kg","🫚"],["p21","Country Eggs","Other","f10",14,12,240,"piece","🥚"],["p22","Fresh Lemon","Fruits","f6",60,52,180,"piece","🍋"],["p23","Sweet Corn","Vegetables","f3",35,29,300,"piece","🌽"],["p24","Red Spinach","Vegetables","f1",28,23,160,"bundle","🌿"]
+  ].map(([id,name,category,farmerId,retail,wholesale,stock,unit,emoji],i)=>({id,name,category,farmerId,price:retail,retail,wholesale,stock,unit,emoji,available:true,minimum:category==="Grains"||category==="Pulses"?10:2,harvest:"Recently harvested",quality:"Freshly picked from the farm.",organic:i%5===1}));
+  const priceCrops = ["Rice","Tomato","Potato","Onion","Brinjal","Mango","Lentil","Green chili"];
+  const marketNames = [["Karwan Bazar","Dhaka"],["Savar Bazar","Dhaka"],["Bogura Sadar","Bogura"],["Rajshahi City Market","Rajshahi"],["Rangpur Central Market","Rangpur"]];
+  const priceBase = {Rice:61,Tomato:40,Potato:31,Onion:76,Brinjal:46,Mango:92,Lentil:112,"Green chili":108};
+  const marketPrices = [];
+  priceCrops.forEach((crop,ci)=>marketNames.forEach(([market,district],mi)=>{
+    const base=priceBase[crop]+((ci*7+mi*5)%13)-6;
+    const history=Array.from({length:7},(_,i)=>Math.max(10,base+((i*3+mi*2+ci)%9)-4));
+    marketPrices.push({crop,market,district,price:base,unit:"kg",date:"2026-11-02",source:"Sample simulation",history});
+  }));
+  const customers = [["c1","Nusrat Jahan","Dhaka","Household"],["c2","Tanvir Ahmed","Dhaka","Restaurant"],["c3","Maliha Chowdhury","Savar","Household"],["c4","Green Basket Shop","Bogura","Grocery shop"],["c5","Rafiq Hasan","Cumilla","Household"],["c6","Village Kitchen","Rajshahi","Restaurant"],["c7","Sadia Islam","Rangpur","Household"],["c8","Fresh Mart","Mymensingh","Grocery shop"]].map(([id,name,district,type])=>({id,name,district,type}));
+  const orderSeeds = [
+    ["o1","p2","c1",4,"Retail","Pending"],["o2","p1","c2",60,"Wholesale","Accepted"],["o3","p3","c4",80,"Wholesale","Preparing"],["o4","p10","c6",12,"Retail","Shipped"],["o5","p4","c3",5,"Retail","Delivered"],["o6","p5","c5",8,"Retail","Delivered"],["o7","p8","c7",10,"Wholesale","Pending"],["o8","p12","c2",25,"Wholesale","Delivered"],["o9","p6","c1",6,"Retail","Cancelled"],["o10","p11","c8",30,"Wholesale","Accepted"],["o11","p9","c3",3,"Retail","Preparing"],["o12","p18","c4",45,"Wholesale","Delivered"],["o13","p14","c5",4,"Retail","Pending"],["o14","p13","c6",18,"Wholesale","Shipped"],["o15","p21","c1",24,"Retail","Delivered"]
+  ];
+  const partnerSeeds=[["d1","Hasan Ali","01700-000001","Dhaka"],["d2","Rina Sultana","01700-000002","Bogura"],["d3","Mizanur Rahman","01700-000003","Rajshahi"],["d4","Sumi Akter","01700-000004","Cumilla"],["d5","Alamgir Kabir","01700-000005","Rangpur"]];
+  function initialData(){
+    const products=structuredClone(baseProducts);
+    const orders=orderSeeds.map(([id,productId,customerId,qty,type,status],i)=>{
+      const p=products.find(x=>x.id===productId);
+      const stockReserved=["Accepted","Preparing","Shipped"].includes(status);
+      if(!["Pending","Cancelled"].includes(status))p.stock=Math.max(0,p.stock-qty);
+      return{id,productId,farmerId:p.farmerId,customerId,qty,type,status,stockReserved,payment:status==="Delivered"?"Paid":["Paid","Pending","Paid"][i%3],delivery:["Platform Delivery","Farmer Delivery","Customer Pickup"][i%3],deliveryStatus:status==="Delivered"?"Delivered":status==="Shipped"?"In Transit":"Awaiting Assignment",date:new Date(Date.UTC(2026,9,3+i)).toISOString().slice(0,10),price:type==="Wholesale"?p.wholesale:p.retail};
+    });
+    return {farmers:structuredClone(farmers),products,customers:structuredClone(customers),
+      orders,
+      partners:partnerSeeds.map(([id,name,phone,area],i)=>({id,name,phone,area,status:["Assigned","Available","In Transit","Available","Assigned"][i]})),marketPrices:structuredClone(marketPrices),
+      notifications:[{id:"n1",text:"A new order is waiting for review.",type:"New order",read:false},{id:"n2",text:"Your sample order has been accepted.",type:"Order update",read:false},{id:"n3",text:"Market price sample records were updated.",type:"Price update",read:true},{id:"n4",text:"Delivery partner Hasan Ali was assigned.",type:"Delivery",read:true},{id:"n5",text:"Sample payment marked complete.",type:"Payment",read:true}],
+      reviews:[{farmerId:"f1",customer:"Nusrat Jahan",rating:5,text:"Fresh tomatoes and friendly service."},{farmerId:"f5",customer:"Green Basket Shop",rating:5,text:"Great quality potatoes, delivered on time."},{farmerId:"f4",customer:"Village Kitchen",rating:4,text:"Lovely seasonal mangoes."}],
+      cart:[],favorites:[],language:"en",dark:false};
+  }
+  function loadData(){try{const raw=localStorage.getItem(KEY);if(raw){const saved=JSON.parse(raw);return {...initialData(),...saved}}}catch(e){console.warn("Could not load saved demo data:",e)}return initialData()}
+  let state=loadData(),page="home",role="customer",selectedCrop="Tomato",searchTerm="",categoryFilter="All";
+  const content=document.getElementById("content"),t=(key)=>((translations[state.language]||translations.en)[key]||translations.en[key]||key);
+  const translations={
+    en:{"nav.home":"Overview","nav.market":"Marketplace","nav.prices":"Market prices","nav.farmer":"Farmer portal","nav.orders":"Orders","nav.delivery":"Delivery","nav.calculator":"Earnings calculator","nav.admin":"Admin & demo settings"},
+    bn:{"nav.home":"সারসংক্ষেপ","nav.market":"কৃষিপণ্য বাজার","nav.prices":"বাজারদর","nav.farmer":"কৃষক পোর্টাল","nav.orders":"অর্ডার","nav.delivery":"ডেলিভারি","nav.calculator":"আয় হিসাব","nav.admin":"অ্যাডমিন ও সেটিংস"}
+  };
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){console.error("Could not save demo data:",e);toast("Could not save changes in this browser.")}}
+  function money(n){return "৳"+Number(n||0).toLocaleString("en-BD")}
+  function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+  function farmer(id){return state.farmers.find(x=>x.id===id)||{name:"Unknown farmer",location:"Bangladesh",avatar:"🌱",verified:false,rating:0}}
+  function product(id){return state.products.find(x=>x.id===id)}
+  function customer(id){return state.customers.find(x=>x.id===id)||{name:"Demo customer",district:"Bangladesh",type:"Household"}}
+  function statusBadge(status){let cl=["Delivered","Paid","Accepted"].includes(status)?"":status==="Cancelled"||status==="Failed"?"red":["Pending","Preparing","In Transit","Assigned"].includes(status)?"orange":"gray";return `<span class="badge ${cl}">${esc(status)}</span>`}
+  function stat(label,value,note,icon){return `<article class="stat"><div class="stat-top"><span>${label}</span><span class="stat-icon">${icon}</span></div><strong>${value}</strong><small>${note}</small></article>`}
+  function pageHead(title,desc,button=""){return `<div class="page-head"><div><div class="eyebrow">KRISHIBONDHU · DEMO</div><h1>${title}</h1><p>${desc}</p></div>${button?`<div class="actions">${button}</div>`:""}</div>`}
+  function setPage(next){page=next;document.getElementById("sidebar").classList.remove("open");render()}
+  function navigateButton(pageName,label,cls="text-link"){return `<button class="${cls}" data-go="${pageName}">${label}</button>`}
+  function getMetrics(){
+    const delivered=state.orders.filter(o=>o.status==="Delivered"), pending=state.orders.filter(o=>o.status==="Pending");
+    const revenue=delivered.reduce((s,o)=>s+o.price*o.qty,0);
+    const pendingPayments=state.orders.filter(o=>o.payment==="Pending").reduce((s,o)=>s+o.price*o.qty,0);
+    return {products:state.products.filter(p=>p.available).length,stock:state.products.reduce((s,p)=>s+p.stock,0),orders:state.orders.length,delivered:delivered.length,pending:pending.length,revenue,pendingPayments};
+  }
+  function orderRows(orders){
+    if(!orders.length)return `<div class="empty">No orders here yet.</div>`;
+    return `<div class="table-wrap"><table><thead><tr><th>Order</th><th>Product / buyer</th><th>Quantity</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody>${orders.map(o=>{const p=product(o.productId),c=customer(o.customerId);return `<tr><td>#${esc(o.id.toUpperCase())}<br><small>${esc(o.date)}</small></td><td><strong>${esc(p?.name||"Removed product")}</strong><br><small>${esc(c.name)} · ${esc(o.type)}</small></td><td>${o.qty} ${esc(p?.unit||"")}</td><td class="price">${money(o.price*o.qty)}</td><td>${statusBadge(o.status)}</td><td>${o.status==="Pending"?`<button class="btn small" data-order-action="accept" data-id="${o.id}">Accept</button>`:o.status==="Accepted"?`<button class="btn small light" data-order-action="prepare" data-id="${o.id}">Prepare</button>`:""}</td></tr>`}).join("")}</tbody></table></div>`;
+  }
+  function renderHome(){
+    const m=getMetrics(),latest=state.products.filter(p=>p.available).slice(0,4),orders=[...state.orders].slice(-5).reverse();
+    return `<div class="hero"><div class="eyebrow">WELCOME TO KRISHIBONDHU</div><h1>Fair prices for farmers.<br>Fresh products for everyone.</h1><p>Connect directly with farmers, compare sample market prices and discover fresh agricultural products without unnecessary middlemen.</p><div class="actions"><button class="btn" data-go="market">Explore marketplace →</button><button class="btn secondary" data-go="farmer">Sell your crops</button><button class="btn secondary" data-go="prices">Check market prices</button></div></div>
+    <div class="banner">ⓘ <span><strong>Demo Mode:</strong> Fictional profiles, orders and simulated prices. No real transactions or live services are connected.</span></div>
+    <div class="grid stats">${stat("Products available",m.products,"Across 10 demo farms","▦")}${stat("Orders in demo",m.orders,"Sample order records","▤")}${stat("Completed sales",money(m.revenue),"Gross demo sales · delivered orders","৳")}${stat("Pending payments",money(m.pendingPayments),"Sample payment statuses","◷")}</div>
+    <div class="grid two-col"><section class="card"><div class="card-head"><div><h2>Fresh from the farms</h2><p>Sample listings from fictional farmers</p></div>${navigateButton("market","View all →")}</div><div class="grid products">${latest.map(productCard).join("")}</div></section>
+    <section class="card"><div class="card-head"><div><h2>Recent orders</h2><p>Demo activity across the marketplace</p></div>${navigateButton("orders","All orders →")}</div>${orderRows(orders)}</section></div>
+    <section class="card" style="margin-top:15px"><div class="card-head"><div><h2>Meet local farmers</h2><p>Fictional demo profiles from across Bangladesh</p></div></div><div class="farmer-list" style="grid-template-columns:repeat(3,1fr)">${state.farmers.slice(0,6).map(farmerRow).join("")}</div></section>`;
+  }
+  function productCard(p){
+    const f=farmer(p.farmerId),fav=state.favorites.includes(p.id);
+    return `<article class="card product-card"><div class="product-art"><span>${p.emoji}</span><span class="badge">${esc(p.category)}</span><button class="heart" data-favorite="${p.id}" aria-label="Save ${esc(p.name)}">${fav?"♥":"♡"}</button></div><div class="product-body"><h3>${esc(p.name)}</h3><div class="location">⌖ ${esc(f.location)} · ${f.verified?"✓ Verified":"Community seller"}</div><div class="farmer-line">${f.avatar} ${esc(f.name)} · ★ ${f.rating}</div><div class="product-bottom"><div class="product-price">${money(p.retail)} <small>/ ${esc(p.unit)}</small></div><button class="btn small" data-add-cart="${p.id}" ${p.stock<=0?"disabled":""}>Add</button></div><div class="location" style="margin-top:7px">${p.stock} ${esc(p.unit)} available · wholesale ${money(p.wholesale)}</div></div></article>`;
+  }
+  function farmerRow(f){return `<div class="farmer-row"><div class="farmer-avatar">${f.avatar}</div><div><strong>${esc(f.name)} ${f.verified?"✓":""}</strong><small>${esc(f.location)} · ${state.products.filter(p=>p.farmerId===f.id).length} listings</small></div><span class="rating">★ ${f.rating}</span></div>`}
+  function renderMarketplace(){
+    let ps=state.products.filter(p=>p.available&&p.stock>0);
+    if(searchTerm)ps=ps.filter(p=>(p.name+" "+p.category+" "+farmer(p.farmerId).location).toLowerCase().includes(searchTerm.toLowerCase()));
+    if(categoryFilter!=="All")ps=ps.filter(p=>p.category===categoryFilter);
+    return `${pageHead("Fresh from the farm","Shop directly from farmers. Prices and products shown here are sample demo listings.",`<button class="btn secondary" data-go="orders">🛒 Cart (${state.cart.reduce((s,x)=>s+x.qty,0)})</button>`)}
+      <div class="banner">ⓘ All product listings, prices and farmers are fictional sample data for this interactive demo.</div>
+      <div class="filters"><input id="productSearch" value="${esc(searchTerm)}" placeholder="Search crops, categories or locations..." aria-label="Search products"><select id="categoryFilter"><option>All</option>${["Grains","Vegetables","Fruits","Pulses","Spices","Other"].map(c=>`<option ${c===categoryFilter?"selected":""}>${c}</option>`).join("")}</select><select id="districtFilter"><option value="">All districts</option>${districts.map(d=>`<option>${esc(d)}</option>`).join("")}</select></div>
+      <div class="grid products" id="productGrid">${ps.length?ps.map(productCard).join(""):`<div class="empty">No products match your search.</div>`}</div>
+      <section class="card" style="margin-top:18px"><div class="card-head"><div><h2>Farmers in the community</h2><p>Fictional profiles for exploring the prototype</p></div></div><div class="farmer-list" style="grid-template-columns:repeat(3,1fr)">${state.farmers.slice(0,9).map(farmerRow).join("")}</div></section>`;
+  }
+  function renderPrices(){
+    const rows=state.marketPrices.filter(x=>x.crop===selectedCrop),max=Math.max(...rows.map(x=>Math.max(...x.history))),min=Math.min(...rows.map(x=>Math.min(...x.history)));
+    const high=rows.reduce((a,b)=>a.price>b.price?a:b),low=rows.reduce((a,b)=>a.price<b.price?a:b);
+    const first=rows[0]?.history||[0,0,0,0,0,0,0],w=620,h=190,pad=30;
+    const pts=first.map((v,i)=>`${pad+i*(w-2*pad)/6},${h-pad-(v-min)/(max-min||1)*(h-2*pad)}`).join(" ");
+    const labels=["7 days ago","6d","5d","4d","3d","2d","Latest"];
+    return `${pageHead("Market price comparison","Compare illustrative crop prices across five Bangladesh markets. All records are simulated.")}
+      <div class="banner">⚠ <span><strong>Sample Data — Not Live Market Prices.</strong> Competition demo prices are simulated and are not an offer or a forecast. Prices may change; compare buyers and costs before deciding.</span></div>
+      <div class="filters"><label style="font-size:12px;font-weight:650">Choose crop</label><select id="cropSelect">${priceCrops.map(c=>`<option ${selectedCrop===c?"selected":""}>${c}</option>`).join("")}</select><span class="crop-chip">7-day sample history</span></div>
+      <div class="grid stats">${stat("Highest sample price",money(high.price)+"/kg",`${high.market}, ${high.district}`,"↗")}${stat("Lowest sample price",money(low.price)+"/kg",`${low.market}, ${low.district}`,"↘")}${stat("Sample average",money(Math.round(rows.reduce((s,r)=>s+r.price,0)/rows.length))+"/kg","Across five markets","৳")}${stat("Trend indication",first[6]>first[0]?"Rising":first[6]<first[0]?"Falling":"Stable","Historical demo values only","⌁")}</div>
+      <div class="grid two-col"><section class="card"><div class="card-head"><div><h2>${esc(selectedCrop)} · seven-day trend</h2><p>Sample history · BDT per kg</p></div>${statusBadge(first[6]>first[0]?"Rising":first[6]<first[0]?"Falling":"Stable")}</div><div class="chart"><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Simulated seven day ${esc(selectedCrop)} price trend"><line x1="${pad}" y1="${h-pad}" x2="${w-pad}" y2="${h-pad}" stroke="var(--line)"/><polyline fill="none" stroke="#40865a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="${pts}"/>${first.map((v,i)=>{const x=pad+i*(w-2*pad)/6,y=h-pad-(v-min)/(max-min||1)*(h-2*pad);return `<circle cx="${x}" cy="${y}" r="5" fill="#40865a"/>`}).join("")}${labels.map((l,i)=>`<text class="chart-label" x="${pad+i*(w-2*pad)/6}" y="${h-7}" text-anchor="middle">${l}</text>`).join("")}</svg></div><p class="notice">${first[6]>first[0]?"Sample price has risen in this short history. Consider comparing available offers; future prices are uncertain.":first[6]<first[0]?"Sample price has fallen in this short history. Compare alternative buyers and markets.":"Sample prices are broadly stable in this short history."}</p></section>
+      <section class="card"><div class="card-head"><div><h2>Market comparison</h2><p>Reported sample prices · ${esc(selectedCrop)}</p></div></div><div class="table-wrap"><table><thead><tr><th>Market</th><th>District</th><th>Price / kg</th><th>Updated</th></tr></thead><tbody>${rows.map(r=>`<tr><td><strong>${esc(r.market)}</strong><br><small>${esc(r.source)}</small></td><td>${esc(r.district)}</td><td class="price">${money(r.price)}</td><td>${esc(r.date)}</td></tr>`).join("")}</tbody></table></div></section></div>`;
+  }
+  function renderFarmer(){
+    const m=getMetrics(),my=state.products.filter(p=>p.farmerId==="f1"),myOrders=state.orders.filter(o=>o.farmerId==="f1");
+    const rev=myOrders.filter(o=>o.status==="Delivered").reduce((s,o)=>s+o.qty*o.price,0),pending=myOrders.filter(o=>o.payment==="Pending").reduce((s,o)=>s+o.qty*o.price,0);
+    return `${pageHead("Your farm, your marketplace","Manage sample crop listings, review incoming orders and compare buyer opportunities.",`<button class="btn" id="addProductBtn">＋ List a crop</button>`)}
+      <div class="banner">🌱 <span>Farmer demo profile: <strong>Ayesha Begum · Savar, Dhaka</strong> · ${farmer("f1").verified?"Verified farmer":"Verification pending"}. Changes are saved only in this browser.</span></div>
+      <div class="grid stats">${stat("My active listings",my.filter(p=>p.available).length,"Products currently listed","▦")}${stat("Available quantity",my.reduce((s,p)=>s+p.stock,0),"Across my sample crops","⚖")}${stat("Completed sales",money(rev),"Gross revenue · delivered demo orders","৳")}${stat("Pending payments",money(pending),"Sample payment records","◷")}</div>
+      <div class="grid two-col"><section class="card"><div class="card-head"><div><h2>My crop listings</h2><p>Edit availability, prices and quantities</p></div></div>${my.length?`<div class="table-wrap"><table><thead><tr><th>Crop</th><th>Stock</th><th>Retail / kg</th><th>Wholesale</th><th>Listing</th><th></th></tr></thead><tbody>${my.map(p=>`<tr><td><div class="product-mini"><span class="mini-image">${p.emoji}</span><span><strong>${esc(p.name)}</strong><small>${esc(p.category)}</small></span></div></td><td>${p.stock} ${esc(p.unit)}</td><td>${money(p.retail)}</td><td>${money(p.wholesale)}</td><td>${statusBadge(p.available?"Available":"Paused")}</td><td><button class="btn small secondary" data-edit-product="${p.id}">Edit</button> <button class="btn small ${p.available?"light":"secondary"}" data-toggle-product="${p.id}">${p.available?"Pause":"Activate"}</button></td></tr>`).join("")}</tbody></table></div>`:`<div class="empty">No crops listed yet. Add your first product.</div>`}</section>
+      <section class="card"><div class="card-head"><div><h2>Find my best buyer</h2><p>Compare net earnings, not only the price</p></div></div><div class="form-grid"><label>Crop<select id="buyerCrop">${my.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join("")}</select></label><label>Available quantity (kg)<input id="buyerQty" type="number" value="50" min="1"></label><label>Delivery cost (৳)<input id="buyerDelivery" type="number" value="350" min="0"></label><label>Other costs (৳)<input id="buyerOther" type="number" value="100" min="0"></label></div><div id="buyerResults"></div><p class="notice">Illustrative buyer offers and delivery costs only; confirm actual terms with buyers.</p></section></div>
+      <section class="card" style="margin-top:15px"><div class="card-head"><div><h2>Incoming orders</h2><p>Orders for your demo listings</p></div>${navigateButton("orders","Manage all →")}</div>${orderRows(myOrders.filter(o=>!["Delivered","Cancelled"].includes(o.status)))}</section>`;
+  }
+  function buyerComparison(){
+    const p=product(document.getElementById("buyerCrop")?.value),qty=Math.max(0,Number(document.getElementById("buyerQty")?.value||0)),delivery=Math.max(0,Number(document.getElementById("buyerDelivery")?.value||0)),other=Math.max(0,Number(document.getElementById("buyerOther")?.value||0));
+    const offers=[{name:"Green Basket Shop",price:p?.wholesale||0,required:20,cost:delivery},{name:"Village Kitchen",price:(p?.wholesale||0)+4,required:35,cost:delivery*1.35},{name:"Nearby household group",price:p?.retail||0,required:5,cost:delivery*.7}].filter(o=>qty>=o.required).map(o=>({...o,net:o.price*qty-o.cost-other})).sort((a,b)=>b.net-a.net);
+    document.getElementById("buyerResults").innerHTML=offers.length?`<div class="table-wrap" style="margin-top:12px"><table><thead><tr><th>Buyer offer</th><th>Price/kg</th><th>Est. costs</th><th>Net earnings</th></tr></thead><tbody>${offers.map((o,i)=>`<tr><td>${esc(o.name)} ${i===0?'<span class="badge">Best net</span>':""}<br><small>Minimum ${o.required} kg</small></td><td>${money(o.price)}</td><td>${money(o.cost+other)}</td><td class="price">${money(o.net)}</td></tr>`).join("")}</tbody></table></div>`:`<div class="empty">Enter a valid quantity to compare available demo offers.</div>`;
+  }
+  function renderOrders(){
+    const active=state.orders.filter(o=>!["Delivered","Cancelled"].includes(o.status)),all=[...state.orders].reverse();
+    return `${pageHead("Orders & shopping cart","Explore a simulated order flow. Orders here are not real purchases.",`<button class="btn secondary" id="checkoutBtn">🛒 Checkout (${state.cart.reduce((s,x)=>s+x.qty,0)})</button>`)}
+      <div class="banner">ⓘ Demo orders do not reserve products until accepted. Accepting an order checks available stock and reserves it; cancelling a reserved order restores that stock.</div>
+      <div class="grid two-col"><section class="card"><div class="card-head"><div><h2>Active orders</h2><p>Update sample order progress</p></div></div>${active.length?`<div class="table-wrap"><table><thead><tr><th>Order</th><th>Product / buyer</th><th>Qty / total</th><th>Status</th><th>Action</th></tr></thead><tbody>${active.map(o=>{const p=product(o.productId),c=customer(o.customerId);return `<tr><td>#${o.id.toUpperCase()}<br><small>${o.date}</small></td><td><strong>${esc(p?.name||"Removed product")}</strong><br><small>${esc(c.name)} · ${o.type}</small></td><td>${o.qty} × ${money(o.price)}<br><strong>${money(o.qty*o.price)}</strong></td><td>${statusBadge(o.status)}</td><td>${orderAction(o)}</td></tr>`}).join("")}</tbody></table></div>`:`<div class="empty">No active orders.</div>`}</section>
+      <section class="card"><div class="card-head"><div><h2>Your demo cart</h2><p>Sample products ready for checkout</p></div></div>${cartHtml()}</section></div>
+      <section class="card" style="margin-top:15px"><div class="card-head"><div><h2>Order history</h2><p>${all.length} sample orders across retail and wholesale</p></div></div>${orderRows(all)}</section>`;
+  }
+  function orderAction(o){
+    if(o.status==="Pending")return `<button class="btn small" data-order-action="accept" data-id="${o.id}">Accept</button> <button class="btn small danger" data-order-action="cancel" data-id="${o.id}">Reject</button>`;
+    if(o.status==="Accepted")return `<button class="btn small light" data-order-action="prepare" data-id="${o.id}">Start preparing</button> <button class="btn small danger" data-order-action="cancel" data-id="${o.id}">Cancel</button>`;
+    if(o.status==="Preparing")return `<button class="btn small light" data-order-action="ship" data-id="${o.id}">Ready / ship</button> <button class="btn small danger" data-order-action="cancel" data-id="${o.id}">Cancel</button>`;
+    if(o.status==="Shipped")return `<button class="btn small light" data-order-action="deliver" data-id="${o.id}">Mark delivered</button>`;
+    return "—";
+  }
+  function cartHtml(){
+    if(!state.cart.length)return `<div class="empty">Your demo cart is empty.<br><br><button class="btn small" data-go="market">Browse products</button></div>`;
+    return `${state.cart.map(item=>{const p=product(item.productId);return p?`<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)"><span class="mini-image">${p.emoji}</span><div style="flex:1"><strong style="font-size:12px">${esc(p.name)}</strong><div class="notice">${money(p.retail)} / ${esc(p.unit)}</div></div><input data-cart-qty="${p.id}" type="number" min="1" max="${p.stock}" value="${item.qty}" style="width:60px;padding:6px;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--ink)"><button class="btn small danger" data-remove-cart="${p.id}">×</button></div>`:""}).join("")}<div style="display:flex;justify-content:space-between;padding:15px 0;font-weight:700">Sample total <span>${money(state.cart.reduce((s,x)=>s+(product(x.productId)?.retail||0)*x.qty,0))}</span></div><button class="btn" id="checkoutBtn2" style="width:100%">Continue to demo checkout</button>`;
+  }
+  function renderDelivery(){
+    const tracking=state.orders.filter(o=>!["Delivered","Cancelled"].includes(o.status));
+    return `${pageHead("Delivery tracking","Explore simulated delivery assignments and order fulfillment.",`<button class="btn secondary" data-go="orders">View orders</button>`)}<div class="banner">ⓘ Delivery partners and statuses are simulated. No live GPS, SMS or delivery service is connected.</div>
+    <div class="grid stats">${stat("Demo partners",state.partners.length,"Fictional delivery profiles","♙")}${stat("Awaiting assignment",state.orders.filter(o=>o.deliveryStatus==="Awaiting Assignment").length,"Sample delivery records","◷")}${stat("In transit",state.orders.filter(o=>o.deliveryStatus==="In Transit").length,"Simulated status only","➤")}${stat("Delivered",state.orders.filter(o=>o.deliveryStatus==="Delivered").length,"Sample completed deliveries","✓")}</div>
+    <div class="grid two-col"><section class="card"><div class="card-head"><div><h2>Delivery queue</h2><p>Assign a simulated partner or update tracking</p></div></div>${tracking.length?`<div class="table-wrap"><table><thead><tr><th>Order / product</th><th>Delivery method</th><th>Tracking</th><th>Partner</th><th></th></tr></thead><tbody>${tracking.map(o=>{const p=product(o.productId),partner=state.partners.find(d=>d.id===o.partnerId);return `<tr><td>#${o.id.toUpperCase()}<br><small>${esc(p?.name||"Product")}</small></td><td>${esc(o.delivery)}</td><td>${statusBadge(o.deliveryStatus)}</td><td>${partner?esc(partner.name):"—"}</td><td><select data-delivery-order="${o.id}" class="field"><option value="">Assign partner</option>${state.partners.map(d=>`<option value="${d.id}" ${o.partnerId===d.id?"selected":""}>${esc(d.name)} · ${esc(d.area)}</option>`).join("")}</select><button class="btn small light" style="margin-top:5px" data-delivery-next="${o.id}">Next status</button></td></tr>`}).join("")}</tbody></table></div>`:`<div class="empty">No orders in the delivery queue.</div>`}</section>
+    <section class="card"><div class="card-head"><div><h2>Demo delivery partners</h2><p>Fictional profiles · placeholder contact details</p></div></div><div class="farmer-list">${state.partners.map(d=>`<div class="farmer-row"><div class="farmer-avatar">🚲</div><div><strong>${esc(d.name)}</strong><small>${esc(d.area)} · ${esc(d.phone)}</small></div><span class="rating">${statusBadge(d.status)}</span></div>`).join("")}</div></section></div>`;
+  }
+  function renderCalculator(){
+    return `${pageHead("Farmer earnings calculator","Compare wholesale and direct-selling estimates. Revenue is not the same as net earnings.")}<div class="banner">ⓘ This calculator provides estimates only. Enter realistic costs for your own situation; demo results are not a price guarantee.</div>
+    <div class="grid two-col"><section class="card"><div class="card-head"><div><h2>Estimate your earnings</h2><p>Change an input to update the comparison</p></div></div><div class="form-grid"><label class="span2">Crop name<input id="calcCrop" value="Tomato"></label><label>Quantity (kg)<input id="calcQty" type="number" value="100" min="0"></label><label>Wholesale price / kg (৳)<input id="calcWholesale" type="number" value="34" min="0"></label><label>Direct selling price / kg (৳)<input id="calcDirect" type="number" value="42" min="0"></label><label>Delivery cost (৳)<input id="calcDelivery" type="number" value="450" min="0"></label><label>Packaging cost (৳)<input id="calcPackaging" type="number" value="250" min="0"></label><label>Other expenses (৳)<input id="calcOther" type="number" value="150" min="0"></label></div></section>
+    <section class="card"><div class="card-head"><div><h2>Estimated comparison</h2><p>Gross revenue minus selling expenses</p></div></div><div id="calcResults"></div></section></div>`;
+  }
+  function updateCalculator(){
+    const val=id=>Math.max(0,Number(document.getElementById(id)?.value||0)),qty=val("calcQty"),wh=val("calcWholesale"),direct=val("calcDirect"),delivery=val("calcDelivery"),pack=val("calcPackaging"),other=val("calcOther");
+    const expenses=delivery+pack+other,whGross=qty*wh,directGross=qty*direct,whNet=whGross-expenses,directNet=directGross-expenses,diff=directNet-whNet;
+    const el=document.getElementById("calcResults");if(el)el.innerHTML=`<div class="calc-result"><div class="calc-box"><small>Wholesale gross revenue</small><strong>${money(whGross)}</strong></div><div class="calc-box"><small>Direct gross revenue</small><strong>${money(directGross)}</strong></div></div><div class="calc-result"><div class="calc-box"><small>Total selling expenses</small><strong>${money(expenses)}</strong></div><div class="calc-box"><small>Wholesale net estimate</small><strong>${money(whNet)}</strong></div></div><div class="calc-box" style="margin-top:12px;background:#e8f2e0"><small>Direct net estimate · difference vs wholesale</small><strong>${money(directNet)} <span style="font-size:12px;color:var(--green2)">(${diff>=0?"+":""}${money(diff)})</span></strong></div><p class="notice">Net estimate = gross revenue − delivery − packaging − other expenses. Actual costs and sale terms vary.</p>`;
+  }
+  function renderAdmin(){
+    const m=getMetrics();
+    return `${pageHead("Admin & demo settings","Review sample marketplace activity, manage simulated records and reset this browser's demo data.",`<button class="btn danger" id="resetAdmin">↻ Reset demo data</button>`)}
+    <div class="banner">🛡 Admin portal is a prototype view only; it has no authentication or real role-based access control. Do not enter real personal or payment data.</div>
+    <div class="grid stats">${stat("Demo farmers",state.farmers.length,"Fictional profiles","♙")}${stat("Demo customers",state.customers.length,"Fictional profiles","♧")}${stat("Products",state.products.length,"Local demo listings","▦")}${stat("Orders",m.orders,"Local demo records","▤")}</div>
+    <div class="grid two-col"><section class="card"><div class="card-head"><div><h2>Farmer verification</h2><p>Example review queue for the admin prototype</p></div></div><div class="table-wrap"><table><thead><tr><th>Farmer</th><th>Location</th><th>Status</th><th></th></tr></thead><tbody>${state.farmers.map(f=>`<tr><td>${f.avatar} <strong>${esc(f.name)}</strong></td><td>${esc(f.location)}</td><td>${statusBadge(f.verified?"Verified":"Review needed")}</td><td><button class="btn small ${f.verified?"secondary":"light"}" data-verify="${f.id}">${f.verified?"Unverify":"Verify"}</button></td></tr>`).join("")}</tbody></table></div></section>
+    <section class="card"><div class="card-head"><div><h2>Add sample market record</h2><p>Manually entered demo prices are clearly labeled</p></div></div><form id="priceForm" class="form-grid"><label>Crop<input name="crop" required placeholder="e.g. Tomato"></label><label>Market<input name="market" required placeholder="Market name"></label><label>District<input name="district" required placeholder="District"></label><label>Price (৳/kg)<input name="price" type="number" min="1" required></label><button class="btn span2">Add sample price</button></form></section></div>
+    <section class="card" style="margin-top:15px"><div class="card-head"><div><h2>Demo data controls</h2><p>Everything is stored locally in this browser only.</p></div></div><div class="actions"><button class="btn secondary" data-go="market">Browse as customer</button><button class="btn secondary" data-go="farmer">Open farmer tools</button><button class="btn secondary" data-go="prices">Review sample prices</button></div><p class="notice">External integrations that would need setup: Firebase authentication and Firestore, payment providers, verified market feeds, delivery partners, SMS and weather services.</p></section>`;
+  }
+  function render(){
+    document.body.classList.toggle("dark",!!state.dark);
+    document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+    const title={home:"Overview",market:"Marketplace",prices:"Market prices",farmer:"Farmer portal",orders:"Orders",delivery:"Delivery",calculator:"Earnings calculator",admin:"Admin & demo settings"}[page]||"Overview";
+    document.getElementById("crumbTitle").textContent=title;
+    document.querySelectorAll("[data-i18n]").forEach(el=>{el.textContent=t(el.dataset.i18n)});
+    document.getElementById("langToggle").textContent=state.language==="en"?"বাংলা":"English";
+    document.getElementById("themeToggle").textContent=state.dark?"☀":"☾";
+    const views={home:renderHome,market:renderMarketplace,prices:renderPrices,farmer:renderFarmer,orders:renderOrders,delivery:renderDelivery,calculator:renderCalculator,admin:renderAdmin};
+    content.innerHTML=(views[page]||renderHome)();
+    bindContent();
+    if(page==="farmer")buyerComparison();
+    if(page==="calculator")updateCalculator();
+  }
+  function bindContent(){
+    content.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>setPage(b.dataset.go));
+    content.querySelectorAll("[data-add-cart]").forEach(b=>b.onclick=()=>addCart(b.dataset.addCart));
+    content.querySelectorAll("[data-favorite]").forEach(b=>b.onclick=()=>{const id=b.dataset.favorite;state.favorites=state.favorites.includes(id)?state.favorites.filter(x=>x!==id):[...state.favorites,id];save();render()});
+    content.querySelectorAll("[data-order-action]").forEach(b=>b.onclick=()=>changeOrder(b.dataset.id,b.dataset.orderAction));
+    content.querySelectorAll("[data-toggle-product]").forEach(b=>b.onclick=()=>{const p=product(b.dataset.toggleProduct);p.available=!p.available;save();render()});
+    content.querySelectorAll("[data-edit-product]").forEach(b=>b.onclick=()=>openProductForm(product(b.dataset.editProduct)));
+    content.querySelectorAll("[data-remove-cart]").forEach(b=>b.onclick=()=>{state.cart=state.cart.filter(x=>x.productId!==b.dataset.removeCart);save();render()});
+    content.querySelectorAll("[data-cart-qty]").forEach(i=>i.onchange=()=>{const item=state.cart.find(x=>x.productId===i.dataset.cartQty),p=product(i.dataset.cartQty);if(item&&p){item.qty=Math.max(1,Math.min(p.stock,Number(i.value)||1));save();render()}});
+    content.querySelectorAll("[data-verify]").forEach(b=>b.onclick=()=>{const f=farmer(b.dataset.verify);f.verified=!f.verified;save();render()});
+    const add=document.getElementById("addProductBtn");if(add)add.onclick=()=>openProductForm();
+    const crop=document.getElementById("cropSelect");if(crop)crop.onchange=()=>{selectedCrop=crop.value;render()};
+    const buyerInputs=["buyerCrop","buyerQty","buyerDelivery","buyerOther"].map(id=>document.getElementById(id)).filter(Boolean);buyerInputs.forEach(i=>i.oninput=buyerComparison);
+    ["calcQty","calcWholesale","calcDirect","calcDelivery","calcPackaging","calcOther","calcCrop"].forEach(id=>{const el=document.getElementById(id);if(el)el.oninput=updateCalculator});
+    const pf=document.getElementById("priceForm");if(pf)pf.onsubmit=addPrice;
+    const reset=document.getElementById("resetAdmin");if(reset)reset.onclick=resetDemo;
+    const checkout=document.getElementById("checkoutBtn"),checkout2=document.getElementById("checkoutBtn2");if(checkout)checkout.onclick=checkoutCart;if(checkout2)checkout2.onclick=checkoutCart;
+    content.querySelectorAll("[data-delivery-order]").forEach(s=>s.onchange=()=>{const o=state.orders.find(x=>x.id===s.dataset.deliveryOrder);if(o)o.partnerId=s.value||undefined;save()});
+    content.querySelectorAll("[data-delivery-next]").forEach(b=>b.onclick=()=>advanceDelivery(b.dataset.deliveryNext));
+    const search=document.getElementById("productSearch");if(search)search.oninput=()=>{searchTerm=search.value;const cursor=search.selectionStart;document.getElementById("productGrid").innerHTML=renderFilteredProducts();const next=document.getElementById("productSearch");if(next){next.focus();next.setSelectionRange(cursor,cursor);bindProductCards()}};
+    const cat=document.getElementById("categoryFilter");if(cat)cat.onchange=()=>{categoryFilter=cat.value;render()};
+    const district=document.getElementById("districtFilter");if(district)district.onchange=()=>{const d=district.value;searchTerm=d;render()};
+  }
+  function renderFilteredProducts(){let ps=state.products.filter(p=>p.available&&p.stock>0);if(searchTerm)ps=ps.filter(p=>(p.name+" "+p.category+" "+farmer(p.farmerId).location).toLowerCase().includes(searchTerm.toLowerCase()));if(categoryFilter!=="All")ps=ps.filter(p=>p.category===categoryFilter);return ps.length?ps.map(productCard).join(""):`<div class="empty">No products match your search.</div>`}
+  function bindProductCards(){content.querySelectorAll("[data-add-cart]").forEach(b=>b.onclick=()=>addCart(b.dataset.addCart));content.querySelectorAll("[data-favorite]").forEach(b=>b.onclick=()=>{const id=b.dataset.favorite;state.favorites=state.favorites.includes(id)?state.favorites.filter(x=>x!==id):[...state.favorites,id];save();render()})}
+  function addCart(id){const p=product(id);if(!p||!p.available||p.stock<1){toast("This sample listing is unavailable.");return}const item=state.cart.find(x=>x.productId===id);if(item)item.qty=Math.min(p.stock,item.qty+1);else state.cart.push({productId:id,qty:1});save();toast(`${p.name} added to demo cart.`);if(page==="market")render()}
+  function checkoutCart(){
+    if(!state.cart.length){toast("Add a product to your demo cart first.");return}
+    const rows=state.cart.map(i=>{const p=product(i.productId);return p?`<div>${esc(p.name)} · ${i.qty} ${esc(p.unit)} · ${money(p.retail*i.qty)}</div>`:""}).join("");
+    showModal("Demo checkout",`<div class="banner">This creates a simulated order only. No payment or delivery service is connected.</div><div class="form-grid"><label class="span2">Delivery address<input id="checkoutAddress" required value="Savar, Dhaka"></label><label>Buying type<select id="checkoutType"><option>Retail</option><option>Wholesale</option></select></label><label>Delivery method<select id="checkoutDelivery"><option>Platform Delivery</option><option>Farmer Delivery</option><option>Customer Pickup</option></select></label><label class="span2">Payment method<select id="checkoutPayment"><option>Cash on delivery (demo)</option><option>Demo payment placeholder</option></select></label></div><div style="margin:15px 0;font-size:12px;line-height:2">${rows}</div><button class="btn" id="placeOrderBtn" style="width:100%">Place simulated order</button>`);
+    document.getElementById("placeOrderBtn").onclick=()=>{
+      const address=document.getElementById("checkoutAddress").value.trim();if(!address){toast("Enter a delivery address.");return}
+      const type=document.getElementById("checkoutType").value,delivery=document.getElementById("checkoutDelivery").value;
+      for(const item of state.cart){const p=product(item.productId);if(!p||p.stock<item.qty){toast(`${p?.name||"A product"} no longer has enough sample stock.`);return}if(type==="Wholesale"&&item.qty<p.minimum){toast(`${p.name} requires a wholesale minimum of ${p.minimum} ${p.unit}.`);return}}
+      for(const item of state.cart){const p=product(item.productId),id="o"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);state.orders.push({id,productId:p.id,farmerId:p.farmerId,customerId:"c1",qty:item.qty,type,status:"Pending",payment:"Pending",delivery,deliveryStatus:"Awaiting Assignment",address,date:new Date().toISOString().slice(0,10),price:type==="Wholesale"?p.wholesale:p.retail})}
+      state.cart=[];state.notifications.unshift({id:"n"+Date.now(),text:"A new simulated order was placed.",type:"New order",read:false});save();closeModal();toast("Simulated order placed. No payment was taken.");render();
+    };
+  }
+  function changeOrder(id,action){
+    const o=state.orders.find(x=>x.id===id),p=o&&product(o.productId);if(!o)return;
+    if(action==="accept"){if(!p||p.stock<o.qty){toast("Not enough available stock to accept this order.");return}p.stock-=o.qty;o.stockReserved=true;o.status="Accepted";o.payment="Pending"}
+    else if(action==="prepare"){if(o.status==="Accepted")o.status="Preparing"}
+    else if(action==="ship"){if(o.status==="Preparing"){o.status="Shipped";o.deliveryStatus="In Transit"}}
+    else if(action==="deliver"){if(o.status==="Shipped"){o.status="Delivered";o.deliveryStatus="Delivered";o.payment="Paid"}}
+    else if(action==="cancel"){if(o.stockReserved&&p){p.stock+=o.qty;o.stockReserved=false}o.status="Cancelled"}
+    state.notifications.unshift({id:"n"+Date.now(),text:`Order ${id.toUpperCase()} status updated: ${o.status}.`,type:"Order update",read:false});
+    save();render();toast(`Order ${o.status.toLowerCase()}.`);
+  }
+  function advanceDelivery(id){
+    const o=state.orders.find(x=>x.id===id);if(!o)return;
+    if(["Pending","Cancelled"].includes(o.status)){toast("Accept this order before starting delivery.");return}
+    if(!o.partnerId){const sel=document.querySelector(`[data-delivery-order="${id}"]`);if(sel?.value)o.partnerId=sel.value;else{toast("Assign a demo delivery partner first.");return}}
+    const statuses=["Awaiting Assignment","Assigned","Picked Up","In Transit","Delivered"];
+    const next=statuses[Math.min(statuses.indexOf(o.deliveryStatus)+1,statuses.length-1)];o.deliveryStatus=next;
+    if(next==="Picked Up")o.status="Shipped";
+    if(next==="Delivered"){o.status="Delivered";o.payment="Paid"}
+    save();render();toast(`Demo delivery updated: ${next}.`);
+  }
+  function openProductForm(p){
+    const editing=!!p;showModal(editing?"Edit crop listing":"List a new crop",`<form id="productForm" class="form-grid">
+      <label>Crop name<input name="name" required value="${esc(p?.name||"")}"></label><label>Category<select name="category">${["Grains","Vegetables","Fruits","Pulses","Spices","Other"].map(c=>`<option ${p?.category===c?"selected":""}>${c}</option>`).join("")}</select></label>
+      <label>Available quantity<input name="stock" type="number" min="0" required value="${p?.stock??100}"></label><label>Unit<select name="unit">${["kg","bag","ton","bundle","piece","dozen"].map(u=>`<option ${p?.unit===u?"selected":""}>${u}</option>`).join("")}</select></label>
+      <label>Retail price (৳/unit)<input name="retail" type="number" min="1" required value="${p?.retail??40}"></label><label>Wholesale price<input name="wholesale" type="number" min="1" required value="${p?.wholesale??35}"></label>
+      <label>Minimum order<input name="minimum" type="number" min="1" value="${p?.minimum??2}"></label><label>Harvest date<input name="harvest" value="${esc(p?.harvest||"Recently harvested")}"></label>
+      <label class="span2">Quality description<textarea name="quality">${esc(p?.quality||"Freshly picked from the farm.")}</textarea></label><label>Organic listing<select name="organic"><option value="false">No</option><option value="true" ${p?.organic?"selected":""}>Yes</option></select></label>
+      <button class="btn span2">${editing?"Save listing":"Add sample listing"}</button></form>`);
+    document.getElementById("productForm").onsubmit=e=>{e.preventDefault();const fd=new FormData(e.target),retail=Number(fd.get("retail")),wholesale=Number(fd.get("wholesale"));if(retail<=0||wholesale<=0){toast("Prices must be greater than zero.");return}
+      const data={name:fd.get("name").trim(),category:fd.get("category"),stock:Number(fd.get("stock")),unit:fd.get("unit"),retail,price:retail,wholesale,minimum:Number(fd.get("minimum"))||1,harvest:fd.get("harvest"),quality:fd.get("quality").trim(),organic:fd.get("organic")==="true",available:true,emoji:p?.emoji||"🌱",farmerId:"f1"};
+      if(editing)Object.assign(p,data);else state.products.unshift({...data,id:"p"+Date.now().toString(36)});
+      save();closeModal();render();toast(editing?"Crop listing updated.":"Crop added to demo marketplace.");
+    };
+  }
+  function addPrice(e){e.preventDefault();const fd=new FormData(e.target),crop=fd.get("crop").trim(),price=Number(fd.get("price"));if(!crop||price<=0){toast("Enter a crop and a valid price.");return}
+    const history=Array.from({length:7},(_,i)=>Math.max(1,price+((i*3)%7)-3));state.marketPrices.unshift({crop,market:fd.get("market").trim(),district:fd.get("district").trim(),price,unit:"kg",date:new Date().toISOString().slice(0,10),source:"Manually entered sample",history});if(!priceCrops.includes(crop))priceCrops.push(crop);save();render();toast("Sample market record added.");
+  }
+  function showModal(title,html){document.getElementById("modalHost").innerHTML=`<div class="modal-backdrop" id="modalBackdrop"><div class="modal" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="modal-head"><h2>${esc(title)}</h2><button class="close" id="closeModal" aria-label="Close">×</button></div>${html}</div></div>`;document.getElementById("closeModal").onclick=closeModal;document.getElementById("modalBackdrop").onclick=e=>{if(e.target.id==="modalBackdrop")closeModal()}}
+  function closeModal(){document.getElementById("modalHost").innerHTML=""}
+  function toast(text){const host=document.getElementById("toastHost");host.innerHTML=`<div class="toast">${esc(text)}</div>`;setTimeout(()=>host.innerHTML="",2600)}
+  function resetDemo(){if(!confirm("Reset all locally saved demo changes and restore the sample data?"))return;localStorage.removeItem(KEY);state=initialData();searchTerm="";categoryFilter="All";selectedCrop="Tomato";save();setPage("home");toast("Demo data reset in this browser.")}
+  document.getElementById("mainNav").addEventListener("click",e=>{const b=e.target.closest("[data-page]");if(b)setPage(b.dataset.page)});
+  document.getElementById("menuToggle").onclick=()=>document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("roleSelect").onchange=e=>{role=e.target.value;setPage(role==="farmer"?"farmer":role==="admin"?"admin":"market");toast(`${role[0].toUpperCase()+role.slice(1)} demo view opened.`)};
+  document.getElementById("langToggle").onclick=()=>{state.language=state.language==="en"?"bn":"en";save();render()};
+  document.getElementById("themeToggle").onclick=()=>{state.dark=!state.dark;save();render()};
+  document.getElementById("notifyBtn").onclick=()=>{const unread=state.notifications.filter(n=>!n.read);showModal("Demo notifications",unread.length?`<div class="farmer-list">${state.notifications.map(n=>`<div class="farmer-row"><div class="farmer-avatar">${n.type==="Delivery"?"🚲":n.type==="Price update"?"📈":"🔔"}</div><div><strong>${esc(n.type)}</strong><small>${esc(n.text)}</small></div>${n.read?"":'<span class="badge orange">New</span>'}</div>`).join("")}</div><button class="btn" id="readNotifs" style="margin-top:15px">Mark all as read</button>`:`<div class="empty">You are all caught up.</div>`);const b=document.getElementById("readNotifs");if(b)b.onclick=()=>{state.notifications.forEach(n=>n.read=true);save();closeModal();toast("Notifications marked as read.")}};
+  document.getElementById("resetSide").onclick=resetDemo;
+  render();
+})();
+</script>
+</body>
+</html>
