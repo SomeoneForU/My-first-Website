@@ -9,7 +9,7 @@ Bangladeshi farmers directly with households, shops, and restaurants.
 
 <br>
 
-**[Open the demo](./index.html)** · **[Explore the features](#-what-you-can-try)**
+**[Open the demo](https://someoneforu.github.io/My-first-Website/)** · **[Explore the features](#-what-you-can-try)**
 
 <br>
 
